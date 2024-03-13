@@ -3,15 +3,12 @@ document.getElementById('detectMotionBtn').addEventListener('click', () => {
 });
 
 function startMotionDetection() {
-    console.log(window.DeviceOrientationEvent);
-    if(window.DeviceMotionEvent)
-    {
-        window.addEventListener('devicemotion', handleMotion, true);
-    }
-    else
-    {
-        alert("Not Moving");
-    }
+    if(window.DeviceMotionEvent){
+        alert.message("Device motion detected")
+        window.addEventListener('devicemotion', handleMotion);
+      }else{
+        alert.log("DeviceMotionEvent is not supported");
+      }
 }
 
 function handleMotion(event) {
@@ -19,7 +16,8 @@ function handleMotion(event) {
     // For simplicity, let's assume motion is always detected
     // Fetch GPS data when motion is detected
     //navigator.geolocation.getCurrentPosition(showPosition);
-    //console.log(event);
+    const outputDiv = document.getElementById('acceleration');
+    outputDiv.innerHTML = `${event.accelerationIncludingGravity.x} m/s2`;
     navigator.geolocation.watchPosition(success, error, options);
 }
 
@@ -50,3 +48,10 @@ function error(err) {
     const outputDiv = document.getElementById('output');
     outputDiv.innerHTML = `Latitude: ${latitude}, Longitude: ${longitude}`;
   }
+
+function showPosition(position) {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+    const outputDiv = document.getElementById('output');
+    outputDiv.innerHTML = `Latitude: ${latitude}, Longitude: ${longitude}`;
+}
