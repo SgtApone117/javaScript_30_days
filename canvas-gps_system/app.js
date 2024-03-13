@@ -4,10 +4,10 @@ document.getElementById('detectMotionBtn').addEventListener('click', () => {
 
 function startMotionDetection() {
     if(window.DeviceMotionEvent){
-        alert.message("Device motion detected")
+        alert("Device motion detected")
         window.addEventListener('devicemotion', handleMotion);
       }else{
-        alert.log("DeviceMotionEvent is not supported");
+        alert("DeviceMotionEvent is not supported");
       }
 }
 
