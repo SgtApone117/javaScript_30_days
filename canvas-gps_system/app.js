@@ -18,7 +18,8 @@ function handleMotion(event) {
     //navigator.geolocation.getCurrentPosition(showPosition);
     const outputDiv = document.getElementById('acceleration');
     outputDiv.innerHTML = `${event.accelerationIncludingGravity.x} m/s2`;
-    navigator.geolocation.watchPosition(success, error, options);
+    //navigator.geolocation.watchPosition(success, error, options);
+    navigator.geolocation.getCurrentPosition(showPosition);
 }
 
 function success(position) {
