@@ -3,7 +3,7 @@ document.getElementById('detectMotionBtn').addEventListener('click', () => {
 });
 
 function startMotionDetection() {
-    if(window.DeviceMotionEvent){
+    if(window.DeviceMotionEvent){ // Only use when device is in motion
         alert("Device motion detected")
         window.addEventListener('devicemotion', handleMotion);
       }else{
@@ -12,14 +12,10 @@ function startMotionDetection() {
 }
 
 function handleMotion(event) {
-    // Check if motion is detected (e.g., acceleration values)
-    // For simplicity, let's assume motion is always detected
-    // Fetch GPS data when motion is detected
-    //navigator.geolocation.getCurrentPosition(showPosition);
+    //navigator.geolocation.getCurrentPosition(showPosition); //Does not update in interval
     const outputDiv = document.getElementById('acceleration');
-    outputDiv.innerHTML = `${event.accelerationIncludingGravity.x} m/s2`;
-    //navigator.geolocation.watchPosition(success, error, options);
-    navigator.geolocation.getCurrentPosition(showPosition);
+    outputDiv.innerHTML = `${event.accelerationIncludingGravity.x} m/s2`; // checking the speed of x direction to check the movement
+    navigator.geolocation.watchPosition(success, error, options);
 }
 
 function success(position) {
@@ -49,10 +45,3 @@ function error(err) {
     const outputDiv = document.getElementById('output');
     outputDiv.innerHTML = `Latitude: ${latitude}, Longitude: ${longitude}`;
   }
-
-function showPosition(position) {
-    const latitude = position.coords.latitude;
-    const longitude = position.coords.longitude;
-    const outputDiv = document.getElementById('output');
-    outputDiv.innerHTML = `Latitude: ${latitude}, Longitude: ${longitude}`;
-}
